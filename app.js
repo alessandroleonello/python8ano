@@ -5,8 +5,8 @@
 // --- Estado Global da Aplicação ---
 let state = {
     user: {
-        name: '',
-        school: '',
+        name: 'Dev',
+        school: 'PyKids',
         avatar: 'snake',
         stars: 0
     },
@@ -1981,10 +1981,9 @@ function setupAvatarPicker() {
 }
 
 function renderUI() {
-    if (state.user.name) {
-        switchView('view-dashboard');
-        renderDashboard();
-    }
+    // Abrir diretamente no Dashboard de Seleção de Aulas
+    switchView('view-dashboard');
+    renderDashboard();
 }
 
 // --- Fluxo de Navegação de Telas ---

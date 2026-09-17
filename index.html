@@ -17,8 +17,9 @@
 
         <!-- ========================================== -->
         <!-- SCREEN 1: ONBOARDING / REGISTRO DO ALUNO   -->
+        <!-- (DESATIVADO TEMPORARIAMENTE A PEDIDO - CÓDIGO PRESERVADO) -->
         <!-- ========================================== -->
-        <section id="view-onboarding" class="view-section active">
+        <section id="view-onboarding" class="view-section hidden">
             <div class="onboarding-card">
                 <div class="brand-header">
                     <div class="logo-wrapper">
@@ -76,7 +77,7 @@
         <!-- ========================================== -->
         <!-- SCREEN 2: DASHBOARD DE AULAS               -->
         <!-- ========================================== -->
-        <section id="view-dashboard" class="view-section hidden">
+        <section id="view-dashboard" class="view-section active">
             <!-- Top Navbar -->
             <header class="dash-header">
                 <div class="dash-brand">
@@ -86,15 +87,16 @@
                     <div class="user-profile-chip">
                         <span id="dash-avatar" class="chip-avatar">🐍</span>
                         <div class="chip-info">
-                            <span id="dash-student-name" class="chip-name">Aluno</span>
-                            <span id="dash-school-name" class="chip-school">Escola</span>
+                            <span id="dash-student-name" class="chip-name">Dev</span>
+                            <span id="dash-school-name" class="chip-school">PyKids</span>
                         </div>
                     </div>
                     <div class="stars-counter">
                         <span class="star-icon">⭐</span>
                         <span id="dash-stars-count">0</span> XP
                     </div>
-                    <button class="btn-secondary-sm" onclick="editProfile()">✏️ Alterar Perfil</button>
+                    <!-- Botão de alterar perfil desativado temporariamente -->
+                    <!-- <button class="btn-secondary-sm" onclick="editProfile()">✏️ Alterar Perfil</button> -->
                 </div>
             </header>
 

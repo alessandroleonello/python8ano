@@ -2030,47 +2030,19 @@ function renderDashboard() {
     document.getElementById('dash-stars-count').textContent = state.user.stars;
     document.getElementById('welcome-name').textContent = state.user.name;
 
-    // Progresso Aula 1
-    const comp1 = state.lessonProgress[1].filter(Boolean).length;
-    const fill1 = document.getElementById('lesson1-progress-fill');
-    const text1 = document.getElementById('lesson1-progress-text');
-    if (fill1) fill1.style.width = `${Math.round((comp1 / 7) * 100)}%`;
-    if (text1) text1.textContent = `${comp1} de 7 atividades`;
+    // Atualizar barras de progresso de todas as Aulas dinamicamente
+    Object.keys(LESSONS).forEach(lessonId => {
+        const lesson = LESSONS[lessonId];
+        const totalAct = lesson.activities.length;
+        const progressArr = state.lessonProgress[lessonId] || [];
+        const completedCount = progressArr.filter(Boolean).length;
 
-    // Progresso Aula 2
-    const comp2 = state.lessonProgress[2].filter(Boolean).length;
-    const fill2 = document.getElementById('lesson2-progress-fill');
-    const text2 = document.getElementById('lesson2-progress-text');
-    if (fill2) fill2.style.width = `${Math.round((comp2 / 5) * 100)}%`;
-    if (text2) text2.textContent = `${comp2} de 5 atividades`;
+        const fillEl = document.getElementById(`lesson${lessonId}-progress-fill`);
+        const textEl = document.getElementById(`lesson${lessonId}-progress-text`);
 
-    // Progresso Aula 3
-    const comp3 = state.lessonProgress[3] ? state.lessonProgress[3].filter(Boolean).length : 0;
-    const fill3 = document.getElementById('lesson3-progress-fill');
-    const text3 = document.getElementById('lesson3-progress-text');
-    if (fill3) fill3.style.width = `${Math.round((comp3 / 5) * 100)}%`;
-    if (text3) text3.textContent = `${comp3} de 5 atividades`;
-
-    // Progresso Aula 4
-    const comp4 = state.lessonProgress[4] ? state.lessonProgress[4].filter(Boolean).length : 0;
-    const fill4 = document.getElementById('lesson4-progress-fill');
-    const text4 = document.getElementById('lesson4-progress-text');
-    if (fill4) fill4.style.width = `${Math.round((comp4 / 5) * 100)}%`;
-    if (text4) text4.textContent = `${comp4} de 5 atividades`;
-
-    // Progresso Aula 5
-    const comp5 = state.lessonProgress[5] ? state.lessonProgress[5].filter(Boolean).length : 0;
-    const fill5 = document.getElementById('lesson5-progress-fill');
-    const text5 = document.getElementById('lesson5-progress-text');
-    if (fill5) fill5.style.width = `${Math.round((comp5 / 5) * 100)}%`;
-    if (text5) text5.textContent = `${comp5} de 5 atividades`;
-
-    // Progresso Aula 6
-    const comp6 = state.lessonProgress[6] ? state.lessonProgress[6].filter(Boolean).length : 0;
-    const fill6 = document.getElementById('lesson6-progress-fill');
-    const text6 = document.getElementById('lesson6-progress-text');
-    if (fill6) fill6.style.width = `${Math.round((comp6 / 5) * 100)}%`;
-    if (text6) text6.textContent = `${comp6} de 5 atividades`;
+        if (fillEl) fillEl.style.width = `${Math.round((completedCount / totalAct) * 100)}%`;
+        if (textEl) textEl.textContent = `${completedCount} de ${totalAct} atividades`;
+    });
 }
 
 function goToDashboard() {

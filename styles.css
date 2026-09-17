@@ -1,0 +1,1477 @@
+/* ==========================================================================
+   PyKids 🐍 - Design System & Modern VS Code Visual Stylesheet
+   ========================================================================== */
+
+/* --- CSS Variables / Design Tokens --- */
+:root {
+    /* Color Palette */
+    --py-yellow: #FFD43B;
+    --py-yellow-hover: #FFE066;
+    --py-yellow-glow: rgba(255, 212, 59, 0.35);
+    
+    --py-blue: #3776AB;
+    --py-blue-dark: #1E415E;
+    --py-blue-light: #4B8BBE;
+    --py-blue-glow: rgba(55, 118, 171, 0.4);
+
+    --vs-bg-dark: #12151E;
+    --vs-card-bg: #1A1E2C;
+    --vs-editor-bg: #1E2233;
+    --vs-sidebar-bg: #151824;
+    --vs-header-bg: #0F121C;
+    --vs-accent-blue: #007ACC;
+    
+    --status-success: #2ECC71;
+    --status-success-bg: rgba(46, 204, 113, 0.15);
+    --status-warning: #F39C12;
+    --status-danger: #E74C3C;
+    --status-purple: #9B59B6;
+
+    --text-primary: #F0F4F8;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-highlight: rgba(255, 212, 59, 0.3);
+
+    /* Fonts */
+    --font-heading: 'Outfit', -apple-system, sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'Fira Code', monospace;
+
+    /* Transitions & Shadows */
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.4);
+    --shadow-glow: 0 0 25px var(--py-yellow-glow);
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Reset & Base Styles --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--vs-bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(55, 118, 171, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(255, 212, 59, 0.1) 0%, transparent 40%);
+}
+
+#app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Utility Classes --- */
+.hidden {
+    display: none !important;
+}
+
+.view-section {
+    width: 100%;
+    min-height: 100vh;
+    animation: fadeIn 0.35s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   1. SCREEN 1: ONBOARDING / REGISTRO DO ALUNO
+   ========================================================================== */
+#view-onboarding {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.onboarding-card {
+    background: var(--vs-card-bg);
+    border: 1px solid var(--border-highlight);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 520px;
+    padding: 2.5rem 2rem;
+    box-shadow: var(--shadow-card), var(--shadow-glow);
+    backdrop-filter: blur(12px);
+    position: relative;
+    overflow: hidden;
+}
+
+.onboarding-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--py-blue), var(--py-yellow), var(--status-purple));
+}
+
+.brand-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.python-icon {
+    font-size: 3.5rem;
+    filter: drop-shadow(0 0 12px var(--py-yellow-glow));
+    animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.sparkle-badge {
+    background: var(--py-blue-dark);
+    color: var(--py-yellow);
+    border: 1px solid var(--py-yellow);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    letter-spacing: 1px;
+}
+
+.brand-header h1 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--py-yellow);
+    letter-spacing: -0.5px;
+    margin-top: 0.2rem;
+}
+
+.brand-header .subtitle {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-top: 0.2rem;
+}
+
+/* Form inputs */
+.form-group {
+    margin-bottom: 1.4rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    background: var(--vs-bg-dark);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.9rem 1.1rem;
+    color: #FFF;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    transition: var(--transition);
+}
+
+.form-group input[type="text"]:focus {
+    outline: none;
+    border-color: var(--py-yellow);
+    box-shadow: 0 0 15px var(--py-yellow-glow);
+}
+
+/* Avatar picker */
+.avatar-picker {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+}
+
+.avatar-option {
+    background: var(--vs-bg-dark);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.6rem 0.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.avatar-option:hover {
+    border-color: var(--py-blue-light);
+    transform: translateY(-2px);
+}
+
+.avatar-option.selected {
+    border-color: var(--py-yellow);
+    background: rgba(255, 212, 59, 0.12);
+    box-shadow: 0 0 12px var(--py-yellow-glow);
+}
+
+.avatar-emoji {
+    font-size: 1.8rem;
+    margin-bottom: 0.2rem;
+}
+
+.avatar-label {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+/* Primary Button */
+.btn-primary {
+    width: 100%;
+    background: linear-gradient(135deg, var(--py-yellow), #F39C12);
+    color: #111;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow);
+    background: linear-gradient(135deg, var(--py-yellow-hover), #F1C40F);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   2. SCREEN 2: DASHBOARD DE AULAS
+   ========================================================================== */
+.dash-header {
+    background: var(--vs-header-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.8rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.dash-brand .logo-sm {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--py-yellow);
+}
+
+.user-badge-bar {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.user-profile-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--vs-card-bg);
+    padding: 0.4rem 0.9rem;
+    border-radius: 30px;
+    border: 1px solid var(--border-color);
+}
+
+.chip-avatar {
+    font-size: 1.3rem;
+}
+
+.chip-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.chip-name {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    line-height: 1.1;
+}
+
+.chip-school {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+}
+
+.stars-counter {
+    background: rgba(255, 212, 59, 0.15);
+    border: 1px solid var(--py-yellow);
+    color: var(--py-yellow);
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 0.95rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.btn-secondary-sm {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-secondary-sm:hover {
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+}
+
+/* Dashboard Content */
+.dash-main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+}
+
+.welcome-banner {
+    background: linear-gradient(135deg, var(--py-blue-dark), var(--vs-card-bg));
+    border: 1px solid var(--py-blue-light);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.banner-content h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: #FFF;
+    margin-bottom: 0.3rem;
+}
+
+.banner-content h2 span {
+    color: var(--py-yellow);
+}
+
+.banner-content p {
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+}
+
+.banner-badge span {
+    background: var(--py-yellow);
+    color: #111;
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-family: var(--font-heading);
+}
+
+/* Lessons Grid */
+.lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.lesson-card {
+    background: var(--vs-card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.6rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition);
+}
+
+.lesson-card.active-card {
+    border-color: var(--py-yellow);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+.lesson-card.active-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-glow);
+}
+
+.lesson-card.locked-card {
+    opacity: 0.6;
+    filter: grayscale(0.4);
+}
+
+.card-status-badge {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    font-family: var(--font-heading);
+}
+
+.card-status-badge.unlocked {
+    background: rgba(46, 204, 113, 0.2);
+    color: var(--status-success);
+    border: 1px solid var(--status-success);
+}
+
+.card-status-badge.locked {
+    background: rgba(100, 116, 139, 0.2);
+    color: var(--text-muted);
+    border: 1px solid var(--text-muted);
+}
+
+.lesson-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.lesson-card-info h3 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+}
+
+.lesson-card-info p {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    margin-bottom: 1.2rem;
+}
+
+.lesson-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.2rem;
+}
+
+.tag {
+    background: var(--vs-bg-dark);
+    border: 1px solid var(--border-color);
+    color: var(--py-yellow);
+    font-family: var(--font-code);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+}
+
+.lesson-card-progress {
+    margin-top: auto;
+}
+
+.progress-bar-container {
+    background: var(--vs-bg-dark);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.4rem;
+    border: 1px solid var(--border-color);
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, var(--py-blue), var(--py-yellow));
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.4s ease;
+}
+
+.progress-text {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.btn-play-lesson {
+    width: 100%;
+    background: var(--py-blue);
+    color: #FFF;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 1rem;
+}
+
+.lesson-card.active-card:hover .btn-play-lesson {
+    background: var(--py-yellow);
+    color: #111;
+}
+
+/* ==========================================================================
+   3. SCREEN 3: VS CODE AMBIENTE DE AULA
+   ========================================================================== */
+#view-lesson {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* IDE Top Bar */
+.ide-header {
+    background: var(--vs-header-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.6rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+}
+
+.ide-controls {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.btn-back {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.82rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-back:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.window-buttons {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+}
+
+.dot.red { background: #FF5F56; }
+.dot.yellow { background: #FFBD2E; }
+.dot.green { background: #27C93F; }
+
+.ide-filename {
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.ide-progress-info {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.stars-counter-sm {
+    color: var(--py-yellow);
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.overall-progress {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.progress-bar-container-sm {
+    background: var(--vs-bg-dark);
+    width: 100px;
+    height: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+/* IDE Container Main Split */
+.ide-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Sidebar Stepper */
+.ide-sidebar {
+    width: 240px;
+    background: var(--vs-sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-title {
+    padding: 0.8rem 1rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.activities-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem 0;
+}
+
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    border-left: 3px solid transparent;
+}
+
+.step-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.step-item.active {
+    background: rgba(0, 122, 204, 0.15);
+    border-left-color: var(--py-yellow);
+}
+
+.step-num {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--vs-bg-dark);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.step-item.completed .step-num {
+    background: var(--status-success);
+    color: #111;
+    border-color: var(--status-success);
+}
+
+.step-item.active .step-num {
+    border-color: var(--py-yellow);
+    color: var(--py-yellow);
+}
+
+.step-title-text {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.step-item.active .step-title-text {
+    color: var(--text-primary);
+}
+
+/* Main Editor Area */
+.ide-editor-area {
+    flex: 1;
+    background: var(--vs-editor-bg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Tabs Bar */
+.ide-tabs-bar {
+    background: var(--vs-sidebar-bg);
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    overflow-x: auto;
+}
+
+.tab-item {
+    padding: 0.55rem 1.2rem;
+    font-family: var(--font-code);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    background: rgba(0, 0, 0, 0.2);
+    border-right: 1px solid var(--border-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.tab-item.active {
+    background: var(--vs-editor-bg);
+    color: var(--py-yellow);
+    border-top: 2px solid var(--py-yellow);
+}
+
+.editor-content-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    scroll-behavior: smooth;
+}
+
+/* Activity Banner */
+.activity-banner {
+    background: var(--vs-card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.2rem 1.5rem;
+}
+
+.banner-head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.operator-badge {
+    min-width: 48px;
+    height: 48px;
+    padding: 0 0.75rem;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--py-blue), var(--py-blue-dark));
+    border: 2px solid var(--py-yellow);
+    color: var(--py-yellow);
+    font-family: var(--font-code);
+    font-weight: 700;
+    font-size: 1.15rem;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.banner-head h2 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--text-primary);
+}
+
+.banner-head p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.act-explanation {
+    background: var(--vs-bg-dark);
+    border-left: 4px solid var(--py-yellow);
+    padding: 0.8rem 1rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.92rem;
+    color: var(--text-primary);
+}
+
+.act-explanation code {
+    background: rgba(255, 212, 59, 0.15);
+    color: var(--py-yellow);
+    font-family: var(--font-code);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+}
+
+/* Interactive Playground Component */
+.interactive-playground-card {
+    background: var(--vs-card-bg);
+    border: 2px solid var(--py-blue-light);
+    border-radius: var(--radius-md);
+    padding: 1.4rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.playground-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+}
+
+.playground-header h3 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--py-yellow);
+}
+
+.hint-pill {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.06);
+    padding: 0.3rem 0.7rem;
+    border-radius: 12px;
+}
+
+.playground-inputs-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.input-box-wrapper {
+    flex: 1;
+    min-width: 140px;
+}
+
+.input-box-wrapper label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.3rem;
+}
+
+.input-box-wrapper input {
+    width: 100%;
+    background: var(--vs-bg-dark);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 0.9rem;
+    color: #FFF;
+    font-family: var(--font-code);
+    font-size: 1.05rem;
+    transition: var(--transition);
+}
+
+.input-box-wrapper input:focus {
+    outline: none;
+    border-color: var(--py-yellow);
+    box-shadow: 0 0 10px var(--py-yellow-glow);
+}
+
+/* Disable font ligatures so programming operators like !=, >=, <=, == render literally */
+code, pre, .tag, .var-name-pill, .operator-badge, .operator-display-box, .py-op {
+    font-variant-ligatures: none !important;
+    font-feature-settings: "liga" 0, "calt" 0 !important;
+}
+
+.operator-display-box {
+    background: var(--py-blue-dark);
+    border: 2px solid var(--py-yellow);
+    color: var(--py-yellow);
+    font-family: var(--font-code);
+    font-weight: 700;
+    font-size: 1.4rem;
+    min-width: 50px;
+    padding: 0 0.4rem;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    box-shadow: 0 0 10px var(--py-yellow-glow);
+    font-variant-ligatures: none;
+    font-feature-settings: "liga" 0, "calt" 0;
+}
+
+.btn-run-code {
+    background: linear-gradient(135deg, #2ECC71, #27AE60);
+    color: #FFF;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+}
+
+.btn-run-code:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
+}
+
+.btn-run-code:active {
+    transform: scale(0.98);
+}
+
+/* Vertical Staked Layout for Variables Activity */
+.playground-inputs-row.vertical-layout {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+}
+
+.playground-inputs-row.vertical-layout .input-box-wrapper {
+    width: 100%;
+}
+
+.playground-inputs-row.vertical-layout .btn-run-code {
+    align-self: flex-start;
+    margin-top: 0.5rem;
+}
+
+/* Variable Name Pill Tag */
+.var-name-pill {
+    background: rgba(156, 220, 254, 0.15);
+    color: #9CDCFE !important;
+    font-family: var(--font-code);
+    font-size: 0.88rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 6px;
+    border: 1px solid rgba(156, 220, 254, 0.4);
+    display: inline-block;
+    box-shadow: 0 0 8px rgba(156, 220, 254, 0.2);
+}
+
+/* Result Display Field in Playground */
+.playground-result-row {
+    margin-bottom: 1.2rem;
+}
+
+.result-box-wrapper label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--py-yellow);
+    margin-bottom: 0.4rem;
+}
+
+.result-display-field {
+    background: var(--vs-bg-dark);
+    border: 2px dashed var(--py-yellow);
+    border-radius: var(--radius-sm);
+    padding: 0.8rem 1.2rem;
+    font-family: var(--font-code);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--status-success);
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
+    transition: var(--transition);
+}
+
+.result-display-field.has-result {
+    border-style: solid;
+    background: rgba(46, 204, 113, 0.08);
+    box-shadow: 0 0 15px rgba(46, 204, 113, 0.2);
+}
+
+.result-display-field.has-error {
+    border-style: solid;
+    border-color: var(--status-danger);
+    color: #FF6B6B;
+    background: rgba(231, 76, 60, 0.08);
+    font-size: 0.95rem;
+}
+
+.result-placeholder {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    font-style: italic;
+}
+
+.presets-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.preset-btn {
+    background: var(--vs-bg-dark);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-family: var(--font-code);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.preset-btn:hover {
+    border-color: var(--py-yellow);
+    color: var(--py-yellow);
+}
+
+/* Code & Console Split Grid */
+.code-and-console-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+}
+
+@media (max-width: 850px) {
+    .code-and-console-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.code-window, .console-window {
+    background: var(--vs-bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.window-header {
+    background: var(--vs-sidebar-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.type-badge {
+    margin-left: auto;
+    background: var(--py-blue-dark);
+    color: var(--py-yellow);
+    border: 1px solid var(--py-yellow);
+    font-family: var(--font-code);
+    font-size: 0.7rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+}
+
+.code-body {
+    display: flex;
+    padding: 1rem;
+    font-family: var(--font-code);
+    font-size: 0.9rem;
+}
+
+.line-numbers {
+    display: flex;
+    flex-direction: column;
+    color: var(--text-muted);
+    padding-right: 1rem;
+    border-right: 1px solid var(--border-color);
+    user-select: none;
+}
+
+.code-lines {
+    padding-left: 1rem;
+    color: #FFF;
+    overflow-x: auto;
+}
+
+/* Syntax Highlighting Colors */
+.py-comment { color: #6A9955; font-style: italic; }
+.py-var { color: #9CDCFE; }
+.py-op { color: #D4D4D4; font-weight: bold; }
+.py-number { color: #B5CEA8; }
+.py-string { color: #CE9178; }
+.py-func { color: #DCDCAA; font-weight: bold; }
+
+/* Console Terminal */
+.console-body {
+    padding: 1rem;
+    font-family: var(--font-code);
+    font-size: 0.92rem;
+    min-height: 120px;
+    color: #A6E22E;
+    overflow-y: auto;
+}
+
+.console-welcome {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.console-line {
+    margin-bottom: 0.4rem;
+}
+
+.console-error {
+    color: #FF6B6B;
+    background: rgba(255, 107, 107, 0.1);
+    padding: 0.5rem;
+    border-radius: 4px;
+    border-left: 3px solid #FF6B6B;
+}
+
+.console-success {
+    color: var(--status-success);
+}
+
+/* Challenge Card */
+.challenge-card {
+    background: var(--vs-card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.4rem;
+    transition: var(--transition);
+}
+
+.challenge-card.completed-card {
+    border-color: var(--status-success);
+    background: rgba(46, 204, 113, 0.05);
+}
+
+.challenge-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+}
+
+.challenge-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.challenge-title h3 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.challenge-badge {
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.25rem 0.7rem;
+    border-radius: 12px;
+    font-family: var(--font-heading);
+}
+
+.challenge-badge.pending {
+    background: rgba(243, 156, 18, 0.2);
+    color: var(--status-warning);
+    border: 1px solid var(--status-warning);
+}
+
+.challenge-badge.completed {
+    background: var(--status-success-bg);
+    color: var(--status-success);
+    border: 1px solid var(--status-success);
+}
+
+.challenge-description {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+}
+
+.challenge-feedback {
+    min-height: 24px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 0.8rem;
+}
+
+/* Quiz Options Styles */
+.quiz-options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin: 1rem 0;
+}
+
+.quiz-option-btn {
+    background: var(--vs-bg-dark);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.85rem 1.1rem;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: var(--transition);
+}
+
+.quiz-option-btn:hover:not(:disabled) {
+    border-color: var(--py-yellow);
+    background: rgba(255, 212, 59, 0.08);
+    transform: translateX(4px);
+}
+
+.quiz-option-letter {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--vs-card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--py-yellow);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.quiz-option-btn.selected-correct {
+    border-color: var(--status-success) !important;
+    background: rgba(46, 204, 113, 0.15) !important;
+    color: #FFF !important;
+    box-shadow: 0 0 15px rgba(46, 204, 113, 0.3);
+}
+
+.quiz-option-btn.selected-correct .quiz-option-letter {
+    background: var(--status-success);
+    color: #111;
+    border-color: var(--status-success);
+}
+
+.quiz-option-btn.selected-wrong {
+    border-color: var(--status-danger) !important;
+    background: rgba(231, 76, 60, 0.15) !important;
+    animation: shake 0.35s ease;
+}
+
+.quiz-option-btn.selected-wrong .quiz-option-letter {
+    background: var(--status-danger);
+    color: #FFF;
+    border-color: var(--status-danger);
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+
+/* Footer Controls */
+.editor-footer-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.btn-nav {
+    background: var(--vs-card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.75rem 1.4rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-nav:hover:not(:disabled) {
+    border-color: var(--py-yellow);
+    color: var(--py-yellow);
+}
+
+.btn-nav:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.btn-next {
+    background: linear-gradient(135deg, var(--py-blue), var(--py-blue-dark));
+    border-color: var(--py-blue-light);
+}
+
+.btn-next:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--py-yellow), #F39C12);
+    color: #111;
+    border-color: var(--py-yellow);
+    box-shadow: var(--shadow-glow);
+}
+
+/* ==========================================================================
+   4. MODAL DE CONCLUSAO DA AULA
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 12, 20, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-card {
+    background: var(--vs-card-bg);
+    border: 2px solid var(--py-yellow);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2rem;
+    max-width: 480px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 0 40px var(--py-yellow-glow);
+    animation: scaleUp 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.trophy-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.trophy-emoji {
+    font-size: 4.5rem;
+    filter: drop-shadow(0 0 15px var(--py-yellow-glow));
+    display: block;
+    animation: bounce 1.5s infinite;
+}
+
+.confetti-sparks {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+}
+
+.modal-card h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--py-yellow);
+    margin-bottom: 0.3rem;
+}
+
+.modal-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+.summary-box {
+    background: var(--vs-bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.95rem;
+}
+
+.summary-label {
+    color: var(--text-secondary);
+}
+
+.summary-val {
+    font-weight: 700;
+    color: #FFF;
+}
+
+.badge-master {
+    background: rgba(255, 212, 59, 0.15);
+    color: var(--py-yellow);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .ide-sidebar {
+        display: none; /* Collapsed on mobile, tabs handle navigation */
+    }
+    .playground-inputs-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .operator-display-box {
+        align-self: center;
+        margin-top: 0;
+    }
+    .btn-run-code {
+        margin-top: 0;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyKids 🐍 - Aprenda Python Brincando!</title>
+    <meta name="description" content="Plataforma interativa e divertida para alunos do ensino fundamental aprenderem programação com Python.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- App Main Container -->
+    <div id="app">
+
+        <!-- ========================================== -->
+        <!-- SCREEN 1: ONBOARDING / REGISTRO DO ALUNO   -->
+        <!-- ========================================== -->
+        <section id="view-onboarding" class="view-section active">
+            <div class="onboarding-card">
+                <div class="brand-header">
+                    <div class="logo-wrapper">
+                        <span class="python-icon">🐍</span>
+                        <span class="sparkle-badge">VS CODE KIDS</span>
+                    </div>
+                    <h1>PyKids</h1>
+                    <p class="subtitle">Aprenda a programar em Python de um jeito superextraordinário!</p>
+                </div>
+
+                <form id="onboarding-form" onsubmit="event.preventDefault(); startApp();">
+                    <div class="form-group">
+                        <label for="student-name">
+                            <span class="label-icon">👤</span> Qual é o seu nome, futuro(a) dev?
+                        </label>
+                        <input type="text" id="student-name" placeholder="Ex: Lucas Silva" required autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="school-name">
+                            <span class="label-icon">🏫</span> Qual é o nome da sua escola?
+                        </label>
+                        <input type="text" id="school-name" placeholder="Ex: Escola Municipal Monteiro Lobato" required autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <label><span class="label-icon">🎭</span> Escolha o seu Mascote Avatar:</label>
+                        <div class="avatar-picker" id="avatar-picker">
+                            <button type="button" class="avatar-option selected" data-avatar="snake">
+                                <span class="avatar-emoji">🐍</span>
+                                <span class="avatar-label">PyCobrinha</span>
+                            </button>
+                            <button type="button" class="avatar-option" data-avatar="wizard">
+                                <span class="avatar-emoji">🧙‍♂️</span>
+                                <span class="avatar-label">Mago do Código</span>
+                            </button>
+                            <button type="button" class="avatar-option" data-avatar="robot">
+                                <span class="avatar-emoji">🤖</span>
+                                <span class="avatar-label">Robô PyBot</span>
+                            </button>
+                            <button type="button" class="avatar-option" data-avatar="cat">
+                                <span class="avatar-emoji">🐱</span>
+                                <span class="avatar-label">Gatinho Dev</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-glow">
+                        <span>🚀 Iniciar Minha Jornada Python</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 2: DASHBOARD DE AULAS               -->
+        <!-- ========================================== -->
+        <section id="view-dashboard" class="view-section hidden">
+            <!-- Top Navbar -->
+            <header class="dash-header">
+                <div class="dash-brand">
+                    <span class="logo-sm">🐍 PyKids</span>
+                </div>
+                <div class="user-badge-bar">
+                    <div class="user-profile-chip">
+                        <span id="dash-avatar" class="chip-avatar">🐍</span>
+                        <div class="chip-info">
+                            <span id="dash-student-name" class="chip-name">Aluno</span>
+                            <span id="dash-school-name" class="chip-school">Escola</span>
+                        </div>
+                    </div>
+                    <div class="stars-counter">
+                        <span class="star-icon">⭐</span>
+                        <span id="dash-stars-count">0</span> XP
+                    </div>
+                    <button class="btn-secondary-sm" onclick="editProfile()">✏️ Alterar Perfil</button>
+                </div>
+            </header>
+
+            <main class="dash-main">
+                <div class="welcome-banner">
+                    <div class="banner-content">
+                        <h2>Olá, <span id="welcome-name">Dev</span>! 👋</h2>
+                        <p>Escolha uma aula abaixo para praticar seus poderes em Python no nosso editor!</p>
+                    </div>
+                    <div class="banner-badge">
+                        <span>Nível 1: Aprendiz</span>
+                    </div>
+                </div>
+
+                <div class="lessons-grid">
+                    <!-- Lesson 1 Card (Active) -->
+                    <div class="lesson-card active-card" onclick="openLesson(1)">
+                        <div class="card-status-badge unlocked">🔓 LIBERADO</div>
+                        <div class="lesson-card-icon">⚡</div>
+                        <div class="lesson-card-info">
+                            <h3>Aula 1: Operações Básicas</h3>
+                            <p>Descubra como o Python faz contas, junta palavras e calcula restos usando os operadores mágicos!</p>
+                            <div class="lesson-tags">
+                                <span class="tag">+</span>
+                                <span class="tag">-</span>
+                                <span class="tag">*</span>
+                                <span class="tag">/</span>
+                                <span class="tag">//</span>
+                                <span class="tag">%</span>
+                                <span class="tag">**</span>
+                            </div>
+                            <div class="lesson-card-progress">
+                                <div class="progress-bar-container">
+                                    <div id="lesson1-progress-fill" class="progress-fill" style="width: 0%;"></div>
+                                </div>
+                                <span id="lesson1-progress-text" class="progress-text">0 de 7 atividades</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card-action">
+                            <button class="btn-play-lesson">Entrar na Aula ➔</button>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 2 Card (Active) -->
+                    <div class="lesson-card active-card" onclick="openLesson(2)">
+                        <div class="card-status-badge unlocked">🔓 LIBERADO</div>
+                        <div class="lesson-card-icon">📦</div>
+                        <div class="lesson-card-info">
+                            <h3>Aula 2: Variáveis e Caixas de Memória</h3>
+                            <p>Aprenda a guardar nomes, pontos e valores dentro de caixinhas de memória do computador!</p>
+                            <div class="lesson-tags">
+                                <span class="tag">nome = ...</span>
+                                <span class="tag">total = a + b</span>
+                                <span class="tag">type()</span>
+                            </div>
+                            <div class="lesson-card-progress">
+                                <div class="progress-bar-container">
+                                    <div id="lesson2-progress-fill" class="progress-fill" style="width: 0%;"></div>
+                                </div>
+                                <span id="lesson2-progress-text" class="progress-text">0 de 5 atividades</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card-action">
+                            <button class="btn-play-lesson">Entrar na Aula ➔</button>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 3 Card (Active) -->
+                    <div class="lesson-card active-card" onclick="openLesson(3)">
+                        <div class="card-status-badge unlocked">🔓 LIBERADO</div>
+                        <div class="lesson-card-icon">⚖️</div>
+                        <div class="lesson-card-info">
+                            <h3>Aula 3: Operadores de Comparação</h3>
+                            <p>Descubra se os valores são iguais, diferentes, maiores ou menores! Respostas sempre True ou False!</p>
+                            <div class="lesson-tags">
+                                <span class="tag">==</span>
+                                <span class="tag">!=</span>
+                                <span class="tag">&gt;</span>
+                                <span class="tag">&lt;</span>
+                                <span class="tag">&gt;=</span>
+                                <span class="tag">&lt;=</span>
+                            </div>
+                            <div class="lesson-card-progress">
+                                <div class="progress-bar-container">
+                                    <div id="lesson3-progress-fill" class="progress-fill" style="width: 0%;"></div>
+                                </div>
+                                <span id="lesson3-progress-text" class="progress-text">0 de 5 atividades</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card-action">
+                            <button class="btn-play-lesson">Entrar na Aula ➔</button>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 4 Card (Active) -->
+                    <div class="lesson-card active-card" onclick="openLesson(4)">
+                        <div class="card-status-badge unlocked">🔓 LIBERADO</div>
+                        <div class="lesson-card-icon">🔀</div>
+                        <div class="lesson-card-info">
+                            <h3>Aula 4: Decisões Inteligentes (if / else)</h3>
+                            <p>Ensine seu robô a tomar decisões lógicas dependendo das respostas do usuário!</p>
+                            <div class="lesson-tags">
+                                <span class="tag">if</span>
+                                <span class="tag">else</span>
+                                <span class="tag">==</span>
+                                <span class="tag">&gt;=</span>
+                                <span class="tag">%</span>
+                            </div>
+                            <div class="lesson-card-progress">
+                                <div class="progress-bar-container">
+                                    <div id="lesson4-progress-fill" class="progress-fill" style="width: 0%;"></div>
+                                </div>
+                                <span id="lesson4-progress-text" class="progress-text">0 de 5 atividades</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 5 Card (Active) -->
+                    <div class="lesson-card active-card" onclick="openLesson(5)">
+                        <div class="card-status-badge unlocked">🔓 LIBERADO</div>
+                        <div class="lesson-card-icon">📜</div>
+                        <div class="lesson-card-info">
+                            <h3>Aula 5: Listas e Coleções Mágicas</h3>
+                            <p>Aprenda a agrupar vários itens em listas, fatiar com [::], adicionar, remover e buscar elementos!</p>
+                            <div class="lesson-tags">
+                                <span class="tag">[]</span>
+                                <span class="tag">[::]</span>
+                                <span class="tag">.append()</span>
+                                <span class="tag">.insert()</span>
+                                <span class="tag">.remove()</span>
+                                <span class="tag">.pop()</span>
+                                <span class="tag">in</span>
+                            </div>
+                            <div class="lesson-card-progress">
+                                <div class="progress-bar-container">
+                                    <div id="lesson5-progress-fill" class="progress-fill" style="width: 0%;"></div>
+                                </div>
+                                <span id="lesson5-progress-text" class="progress-text">0 de 5 atividades</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card-action">
+                            <button class="btn-play-lesson">Entrar na Aula ➔</button>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 6 Card (Active) -->
+                    <div class="lesson-card active-card" onclick="openLesson(6)">
+                        <div class="card-status-badge unlocked">🔓 LIBERADO</div>
+                        <div class="lesson-card-icon">🔄</div>
+                        <div class="lesson-card-info">
+                            <h3>Aula 6: Repetições Mágicas com for</h3>
+                            <p>Automatize repetições usando for, contador i, in range(), len() e acumuladores +=!</p>
+                            <div class="lesson-tags">
+                                <span class="tag">for</span>
+                                <span class="tag">in</span>
+                                <span class="tag">range()</span>
+                                <span class="tag">i</span>
+                                <span class="tag">len()</span>
+                                <span class="tag">+=</span>
+                            </div>
+                            <div class="lesson-card-progress">
+                                <div class="progress-bar-container">
+                                    <div id="lesson6-progress-fill" class="progress-fill" style="width: 0%;"></div>
+                                </div>
+                                <span id="lesson6-progress-text" class="progress-text">0 de 6 atividades</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card-action">
+                            <button class="btn-play-lesson">Entrar na Aula ➔</button>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 7 Card (Active) -->
+                    <div class="lesson-card active-card" onclick="openLesson(7)">
+                        <div class="card-status-badge unlocked">🔓 LIBERADO</div>
+                        <div class="lesson-card-icon">♾️</div>
+                        <div class="lesson-card-info">
+                            <h3>Aula 7: Repetições com while</h3>
+                            <p>Crie laços de repetição baseados em condições com while, while True e a parada de emergência break!</p>
+                            <div class="lesson-tags">
+                                <span class="tag">while</span>
+                                <span class="tag">while True</span>
+                                <span class="tag">break</span>
+                                <span class="tag">contador</span>
+                                <span class="tag">+=</span>
+                            </div>
+                            <div class="lesson-card-progress">
+                                <div class="progress-bar-container">
+                                    <div id="lesson7-progress-fill" class="progress-fill" style="width: 0%;"></div>
+                                </div>
+                                <span id="lesson7-progress-text" class="progress-text">0 de 5 atividades</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card-action">
+                            <button class="btn-play-lesson">Entrar na Aula ➔</button>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 8 Card (Active) -->
+                    <div class="lesson-card active-card" onclick="openLesson(8)">
+                        <div class="card-status-badge unlocked">🔓 LIBERADO</div>
+                        <div class="lesson-card-icon">🎲</div>
+                        <div class="lesson-card-info">
+                            <h3>Aula 8: Sorteios Mágicos com random</h3>
+                            <p>Sorteie números aleatórios, lance dados virtuais e escolha prêmios surpresa com a biblioteca random!</p>
+                            <div class="lesson-tags">
+                                <span class="tag">import random</span>
+                                <span class="tag">randint()</span>
+                                <span class="tag">choice()</span>
+                                <span class="tag">dado</span>
+                                <span class="tag">sorteio</span>
+                            </div>
+                            <div class="lesson-card-progress">
+                                <div class="progress-bar-container">
+                                    <div id="lesson8-progress-fill" class="progress-fill" style="width: 0%;"></div>
+                                </div>
+                                <span id="lesson8-progress-text" class="progress-text">0 de 5 atividades</span>
+                            </div>
+                        </div>
+                        <div class="lesson-card-action">
+                            <button class="btn-play-lesson">Entrar na Aula ➔</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 3: VS CODE AMBIENTE DE AULA         -->
+        <!-- ========================================== -->
+        <section id="view-lesson" class="view-section hidden">
+            <!-- IDE Header Bar -->
+            <header class="ide-header">
+                <div class="ide-controls">
+                    <button class="btn-back" onclick="goToDashboard()">
+                        <span>← Voltar para Aulas</span>
+                    </button>
+                    <div class="window-buttons">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="ide-filename">aula_1_operacoes.py — PyKids VS Code</span>
+                </div>
+                <div class="ide-progress-info">
+                    <div class="stars-counter-sm">
+                        <span>⭐</span> <span id="lesson-stars">0</span> XP
+                    </div>
+                    <div class="overall-progress">
+                        <span id="current-act-counter">Atividade 1 de 7</span>
+                        <div class="progress-bar-container-sm">
+                            <div id="ide-progress-fill" class="progress-fill" style="width: 14%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- IDE Body -->
+            <div class="ide-container">
+                <!-- Sidebar Navigation between activities -->
+                <aside class="ide-sidebar">
+                    <div class="sidebar-title">
+                        <span>📁 EXPLICADOR DE CÓDIGO</span>
+                    </div>
+                    <div class="activities-list" id="activities-stepper">
+                        <!-- Filled by JS -->
+                    </div>
+                </aside>
+
+                <!-- Main Editor Area -->
+                <main class="ide-editor-area">
+                    <!-- Tab Bar -->
+                    <div class="ide-tabs-bar" id="ide-tabs">
+                        <!-- Filled dynamically -->
+                    </div>
+
+                    <!-- Activity Content Wrapper -->
+                    <div class="editor-content-scroll">
+                        
+                        <!-- Operator Explanation Banner -->
+                        <div class="activity-banner" id="act-banner">
+                            <div class="banner-head">
+                                <span id="act-badge-icon" class="operator-badge">+</span>
+                                <div>
+                                    <h2 id="act-title">Atividade 1: O Poderoso Operador +</h2>
+                                    <p id="act-subtitle">Aprenda a somar números e a juntar textos (concatenação)!</p>
+                                </div>
+                            </div>
+                            <div class="act-explanation" id="act-explanation-text">
+                                Em Python, o sinal <code>+</code> faz duas coisas incríveis: se você usar <strong>números</strong>, ele calcula a <strong>soma</strong>. Mas se usar <strong>textos</strong> (entre aspas), ele <strong>junta as palavras</strong>!
+                            </div>
+                        </div>
+
+                        <!-- Playground Component: Input 1 + Input 2 = Play -->
+                        <div class="interactive-playground-card">
+                            <div class="playground-header">
+                                <h3>⚡ Testador de Código Interativo</h3>
+                                <span class="hint-pill">💡 Digite valores abaixo e clique em Executar!</span>
+                            </div>
+
+                            <div class="playground-inputs-row">
+                                <div class="input-box-wrapper">
+                                    <label for="input-val-a">Variável <code class="var-name-pill py-var">valor_1</code></label>
+                                    <input type="text" id="input-val-a" value="10" placeholder="Ex: 10 ou 'Olá '">
+                                </div>
+
+                                <div class="operator-display-box" id="current-operator-box">
+                                    <span id="operator-symbol">+</span>
+                                </div>
+
+                                <div class="input-box-wrapper">
+                                    <label for="input-val-b">Variável <code class="var-name-pill py-var">valor_2</code></label>
+                                    <input type="text" id="input-val-b" value="5" placeholder="Ex: 5 ou 'Mundo'">
+                                </div>
+
+                                <button id="btn-run-code" class="btn-run-code" onclick="runCurrentCode()">
+                                    <span class="play-icon">▶</span>
+                                    <span>Rodar Código</span>
+                                </button>
+                            </div>
+
+                            <!-- Interactive Result Display Box -->
+                            <div class="playground-result-row">
+                                <div class="result-box-wrapper">
+                                    <label>✨ Variável de Saída <code class="var-name-pill py-var">resultado</code></label>
+                                    <div class="result-display-field" id="output-result-field">
+                                        <span class="result-placeholder">Clique em "▶ Rodar Código" para ver o resultado!</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Preset Buttons for student to test easily -->
+                            <div class="presets-row" id="presets-container">
+                                <!-- Populated dynamically by JS for each activity -->
+                            </div>
+                        </div>
+
+                        <!-- Generated Code & Output Split Container -->
+                        <div class="code-and-console-grid">
+                            
+                            <!-- Python Code Editor Window -->
+                            <div class="code-window">
+                                <div class="window-header">
+                                    <span class="file-icon">📄</span>
+                                    <span>Código Python Gerado</span>
+                                </div>
+                                <div class="code-body">
+                                    <div class="line-numbers">
+                                        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                                    </div>
+                                    <pre class="code-lines"><code id="generated-code-display">
+<span class="py-comment"># Seu código Python em tempo real</span>
+<span class="py-var">valor_1</span> = <span class="py-number">10</span>
+<span class="py-var">valor_2</span> = <span class="py-number">5</span>
+<span class="py-var">resultado</span> = <span class="py-var">valor_1</span> <span class="py-op">+</span> <span class="py-var">valor_2</span>
+<span class="py-func">print</span>(<span class="py-string">"Resultado:"</span>, <span class="py-var">resultado</span>)
+                                    </code></pre>
+                                </div>
+                            </div>
+
+                            <!-- VS Code Console Terminal Window -->
+                            <div class="console-window">
+                                <div class="window-header">
+                                    <span class="terminal-icon">🖥️</span>
+                                    <span>Terminal de Saída (VS Code)</span>
+                                    <span id="data-type-badge" class="type-badge">int</span>
+                                </div>
+                                <div class="console-body" id="console-output-box">
+                                    <div class="console-welcome">Clique em "▶ Rodar Código" para ver o resultado do Python!</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quiz da Atividade Card -->
+                        <div class="challenge-card" id="challenge-card">
+                            <div class="challenge-header">
+                                <div class="challenge-title">
+                                    <span class="challenge-icon">🧩</span>
+                                    <h3>Quiz de Fixação</h3>
+                                </div>
+                                <div id="challenge-status-badge" class="challenge-badge pending">
+                                    🔒 Responda o Quiz
+                                </div>
+                            </div>
+                            <div class="challenge-description" id="quiz-question-text">
+                                <!-- Populated dynamically -->
+                            </div>
+                            
+                            <!-- Container para as Alternativas do Quiz -->
+                            <div class="quiz-options-grid" id="quiz-options-container">
+                                <!-- Options populated dynamically -->
+                            </div>
+
+                            <div class="challenge-feedback" id="challenge-feedback-box">
+                                <!-- Success or hint message -->
+                            </div>
+                        </div>
+
+                        <!-- Bottom Navigation Buttons -->
+                        <div class="editor-footer-nav">
+                            <button id="btn-prev-act" class="btn-nav" onclick="navigateActivity(-1)" disabled>
+                                ⬅ Atividade Anterior
+                            </button>
+                            <button id="btn-next-act" class="btn-nav btn-next" onclick="navigateActivity(1)">
+                                Próxima Atividade ➔
+                            </button>
+                        </div>
+
+                    </div>
+                </main>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- MODAL: CONCLUSAO DA AULA                   -->
+        <!-- ========================================== -->
+        <div id="modal-completion" class="modal-overlay hidden">
+            <div class="modal-card">
+                <div class="trophy-wrapper">
+                    <span class="trophy-emoji">🏆</span>
+                    <div class="confetti-sparks">✨🎉✨</div>
+                </div>
+                <h2>Parabéns, Dev <span id="modal-student-name">Aluno</span>!</h2>
+                <p class="modal-subtitle">Você concluiu com sucesso todas as 7 atividades da <strong>Aula 1: Operações Básicas</strong>!</p>
+
+                <div class="summary-box">
+                    <div class="summary-item">
+                        <span class="summary-label">Estrelas Ganhas:</span>
+                        <span class="summary-val">⭐ <span id="modal-stars-count">70</span> XP</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Conquista:</span>
+                        <span class="summary-val badge-master">Mestre dos Operadores ⚡</span>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn-primary" onclick="closeCompletionModal()">
+                        <span>🏠 Voltar para as Aulas</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script App -->
+    <script src="app.js"></script>
+</body>
+</html>
